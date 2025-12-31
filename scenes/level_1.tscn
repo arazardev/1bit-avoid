@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7wyw7b608slp"]
+
+[ext_resource type="Script" uid="uid://cyekgrx7amt2e" path="res://scripts/level_1.gd" id="1_pa8r4"]
+[ext_resource type="Texture2D" uid="uid://52ix2i44qyrl" path="res://assets/frame.png" id="2_15mv3"]
+[ext_resource type="PackedScene" uid="uid://dakbm5ngdvl7p" path="res://scenes/player.tscn" id="3_e3sih"]
+[ext_resource type="PackedScene" uid="uid://dfd7q6an48spo" path="res://scenes/hearts.tscn" id="4_2y5yt"]
+[ext_resource type="Script" uid="uid://bn0l1rgyu0w12" path="res://score.gd" id="5_2os1m"]
+[ext_resource type="Script" uid="uid://cidgfw4qktifv" path="res://scripts/reference_rect.gd" id="6_go7sj"]
+
+[sub_resource type="SystemFont" id="SystemFont_lquwl"]
+font_names = PackedStringArray("PICO-8")
+subpixel_positioning = 0
+
+[sub_resource type="GDScript" id="GDScript_o6xl0"]
+script/source = "extends Label
+"
+
+[sub_resource type="SystemFont" id="SystemFont_ig7tw"]
+font_names = PackedStringArray("PICO-8")
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_o6xl0"]
+font_names = PackedStringArray("PICO-8")
+subpixel_positioning = 0
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_pa8r4")
+
+[node name="Explotions" type="Node2D" parent="."]
+
+[node name="Meteors" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("3_e3sih")]
+position = Vector2(411, 317)
+speed = 150
+
+[node name="Frame" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(417.99997, 304.5)
+scale = Vector2(15.562498, 10.765624)
+texture = ExtResource("2_15mv3")
+metadata/_edit_lock_ = true
+
+[node name="PlayerUI" type="Node2D" parent="."]
+position = Vector2(215, 10)
+
+[node name="Hearts" parent="PlayerUI" instance=ExtResource("4_2y5yt")]
+position = Vector2(0, 10)
+
+[node name="GeneralUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 8
+
+[node name="GameOver" type="Label" parent="GeneralUI"]
+visible = false
+layout_mode = 0
+offset_left = 278.0
+offset_top = 280.0
+offset_right = 544.0
+offset_bottom = 327.0
+theme_override_fonts/font = SubResource("SystemFont_lquwl")
+theme_override_font_sizes/font_size = 34
+text = "Game over!"
+script = SubResource("GDScript_o6xl0")
+
+[node name="Score" type="Label" parent="GeneralUI"]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 12.0
+offset_right = 625.0
+offset_bottom = 36.0
+theme_override_fonts/font = SubResource("SystemFont_ig7tw")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 2
+script = ExtResource("5_2os1m")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="GeneralUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 194.0
+offset_top = 37.0
+offset_right = 586.0
+offset_bottom = 535.0
+grow_horizontal = 2
+grow_vertical = 2
+border_width = 5.0
+script = ExtResource("6_go7sj")
+
+[node name="Win" type="Label" parent="GeneralUI"]
+visible = false
+layout_mode = 0
+offset_left = 291.0
+offset_top = 285.0
+offset_right = 539.0
+offset_bottom = 359.0
+theme_override_fonts/font = SubResource("SystemFont_o6xl0")
+theme_override_font_sizes/font_size = 40
+text = "You Win!"

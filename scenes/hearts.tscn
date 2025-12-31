@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfd7q6an48spo"]
+
+[ext_resource type="Script" uid="uid://bl7lrou5spfr7" path="res://scripts/ui_hearts.gd" id="1_qbydv"]
+
+[node name="UIHearts" type="Node2D"]
+script = ExtResource("1_qbydv")
