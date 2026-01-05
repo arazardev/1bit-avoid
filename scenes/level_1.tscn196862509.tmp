@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7wyw7b608slp"]
+
+[ext_resource type="Script" uid="uid://cyekgrx7amt2e" path="res://scripts/level_1.gd" id="1_pa8r4"]
+[ext_resource type="Texture2D" uid="uid://52ix2i44qyrl" path="res://assets/frame.png" id="2_15mv3"]
+[ext_resource type="PackedScene" uid="uid://dakbm5ngdvl7p" path="res://scenes/player.tscn" id="3_e3sih"]
+[ext_resource type="PackedScene" uid="uid://dfd7q6an48spo" path="res://scenes/hearts.tscn" id="4_2y5yt"]
+[ext_resource type="Script" uid="uid://cidgfw4qktifv" path="res://scripts/reference_rect.gd" id="5_4nkto"]
+[ext_resource type="Script" uid="uid://cm56tw5e5bt1k" path="res://scripts/coin_spawner.gd" id="6_fcfvj"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_pa8r4")
+
+[node name="Explotions" type="Node2D" parent="."]
+
+[node name="Meteors" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("3_e3sih")]
+position = Vector2(411, 317)
+speed = 150
+
+[node name="Frame" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(417.99997, 304.5)
+scale = Vector2(15.562498, 10.765624)
+texture = ExtResource("2_15mv3")
+metadata/_edit_lock_ = true
+
+[node name="PlayerUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 215.0
+offset_top = 10.0
+offset_right = 215.0
+offset_bottom = 10.0
+
+[node name="Hearts" parent="PlayerUI" instance=ExtResource("4_2y5yt")]
+position = Vector2(0, 10)
+
+[node name="ReferenceRect" type="ReferenceRect" parent="PlayerUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 47.0
+offset_right = 392.0
+offset_bottom = 545.0
+grow_horizontal = 2
+grow_vertical = 2
+border_width = 5.0
+script = ExtResource("5_4nkto")
+
+[node name="Spawners" type="Node" parent="."]
+
+[node name="CoinSpawner" type="Node2D" parent="Spawners"]
+script = ExtResource("6_fcfvj")
+metadata/_custom_type_script = "uid://dkpj31xjv28k0"
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(332, 388)
+gizmo_extents = 18.5

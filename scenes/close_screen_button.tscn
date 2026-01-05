@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj8d0mrft18pu"]
+
+[ext_resource type="Script" uid="uid://bsm2u82g22ory" path="res://scripts/close_screen_button.gd" id="1_t32om"]
+
+[sub_resource type="SystemFont" id="SystemFont_t32om"]
+font_names = PackedStringArray("PICO-8")
+
+[node name="CloseScreenButton" type="Button"]
+texture_filter = 2
+offset_right = 40.0
+offset_bottom = 33.0
+theme_override_fonts/font = SubResource("SystemFont_t32om")
+text = "X"
+script = ExtResource("1_t32om")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

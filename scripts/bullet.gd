@@ -18,15 +18,8 @@ func _process(delta: float) -> void:
 		queue_free()
 	
 
-func _on_body_entered(_body: Node2D) -> void:
-	area_or_entered_effect(_body)
-
-
-func _on_area_entered(_area: Area2D) -> void:
-	area_or_entered_effect(_area)
-	
-
-func area_or_entered_effect(we):
-	if we.name == "Player":
+func _on_area_entered(area: Area2D) -> void:
+	if area.name == "Player":
 		return
 	queue_free()
+	

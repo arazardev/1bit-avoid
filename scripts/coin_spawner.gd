@@ -1,0 +1,2 @@
+extends Spawner
+#extends Node

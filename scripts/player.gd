@@ -1,56 +1,40 @@
-extends StaticBody2D
+extends Area2D
 
-@export var speed = 25
-@export var lives = 3
+@export var speed:int = 25
+@export var lives:int = 3
 
 signal damage_taken
-signal player_died 
+signal player_died
+signal points_scored(points:int)
 
-var bullet_scene = preload("res://scenes/bullet.tscn")
-var frame_size
-var frame_position 
-var collision_shape 
-var collision_shape_size
-func _ready():
-	#frame_size = get_viewport_rect().size
+var points_per_coin:int = 100
+var bullet_scene : Resource = preload("res://scenes/bullet.tscn")
+var frame_size: Vector2
+var frame_position : Vector2
+var collision_shape : Node
+var collision_shape_size : Vector2
+
+func _ready() -> void:
 	collision_shape = get_node("CollisionShape2D")
 	collision_shape_size = collision_shape.shape.get_rect().size
 
-func _on_frame_initiated(size,pos):
+func _on_frame_initiated(size:Vector2,pos:Vector2) -> void:
 	frame_size = size
-	frame_position = pos
+	frame_position  = pos
 
-func _process(delta: float) -> void:
-	var velocity = get_velocity_from_user_input()
-	get_input_for_shoot()
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-	position += velocity * delta 
-	var min_pos = frame_position + (collision_shape_size / 2)
-	var max_pos = frame_size+frame_position -  (collision_shape_size / 2)
+func collect_coin()->void:
+	$Sounds/PickupCoin.play()
+	points_scored.emit(points_per_coin)
+	
+func _process(_delta: float) -> void:
+	position = get_global_mouse_position()
+	var min_pos: Vector2 = frame_position + (collision_shape_size / 2)
+	var max_pos: Vector2  = frame_size + frame_position -  (collision_shape_size / 2)
 	position = position.clamp(min_pos, max_pos)
 
-func get_input_for_shoot():
-	if Input.is_action_just_pressed("shoot"):
-		var bullet_instance = bullet_scene.instantiate()
-		add_child(bullet_instance)
-		
-
-
-func get_velocity_from_user_input():
-	var velocity = Vector2.ZERO 
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	return velocity
-
-func _on_get_damage():
+func _on_get_damage() -> void:
 	damage_taken.emit()
+	$Sounds/AudioDamage.play()
 	lives -= 1
 	if lives == 0:
 		player_died.emit()

@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://nhhmgdffuw3i"]
+
+[ext_resource type="Script" uid="uid://3kgbkr6tktq0" path="res://root.gd" id="1_5f71b"]
+[ext_resource type="PackedScene" uid="uid://clvjbhi0rn6l4" path="res://scenes/main_menu.tscn" id="2_qw051"]
+[ext_resource type="PackedScene" uid="uid://cjktixyafslii" path="res://scenes/general_ui.tscn" id="3_qw051"]
+[ext_resource type="AudioStream" uid="uid://clxnhpgvun0d0" path="res://assets/sound/GameOver.mp3" id="4_dfosu"]
+[ext_resource type="AudioStream" uid="uid://cuhtt3v7s4ox" path="res://assets/sound/Win.mp3" id="4_ru1v7"]
+[ext_resource type="AudioStream" uid="uid://ym1hgi1cbgbi" path="res://assets/sound/GameStart.mp3" id="5_be8sn"]
+
+[node name="Root" type="Node"]
+script = ExtResource("1_5f71b")
+
+[node name="MainMenu" parent="." instance=ExtResource("2_qw051")]
+
+[node name="GeneralUI" parent="." instance=ExtResource("3_qw051")]
+visible = false
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Win" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_ru1v7")
+
+[node name="GameOver" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_dfosu")
+
+[node name="GameStart" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_be8sn")

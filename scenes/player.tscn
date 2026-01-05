@@ -1,18 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://dakbm5ngdvl7p"]
+[gd_scene load_steps=6 format=3 uid="uid://dakbm5ngdvl7p"]
 
 [ext_resource type="Script" uid="uid://fhc4lojcbjar" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://ovgwquxupxya" path="res://assets/player_0001.png" id="2_onrkg"]
+[ext_resource type="AudioStream" uid="uid://jjqet57lbvea" path="res://assets/sound/pickupCoin.wav" id="3_dqkch"]
+[ext_resource type="AudioStream" uid="uid://d0xcvdmmia63c" path="res://assets/sound/hitHurt.wav" id="3_qhqgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(40, 35)
 
-[node name="Player" type="StaticBody2D"]
+[node name="Player" type="Area2D" groups=["player"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_onrkg")
 
 [node name="Player" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_onrkg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="PickupCoin" type="AudioStreamPlayer2D" parent="Sounds"]
+position = Vector2(-125, 142)
+stream = ExtResource("3_dqkch")
+
+[node name="AudioDamage" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("3_qhqgy")

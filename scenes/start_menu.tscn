@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctg67ibxdww4h"]
+[gd_scene load_steps=6 format=3 uid="uid://ctg67ibxdww4h"]
 
+[ext_resource type="FontFile" uid="uid://dvo7w0816dc1q" path="res://assets/PICO-8.ttf" id="1_h61rw"]
 [ext_resource type="Script" uid="uid://cyh2ueam2vr65" path="res://scripts/start_game_button.gd" id="1_ouf4f"]
+[ext_resource type="Script" uid="uid://dx57x8kuhqfg0" path="res://scripts/screen_button.gd" id="2_thu50"]
+[ext_resource type="PackedScene" uid="uid://c3r1j8s8x3j7q" path="res://scenes/highscores_view.tscn" id="3_m7x51"]
 
 [sub_resource type="SystemFont" id="SystemFont_uojun"]
 font_names = PackedStringArray("PICO-8")
@@ -14,7 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="."]
+[node name="StartGameButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -25,9 +28,41 @@ offset_right = -239.0
 offset_bottom = -262.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = SubResource("SystemFont_uojun")
+theme_override_fonts/font = ExtResource("1_h61rw")
 theme_override_font_sizes/font_size = 30
 text = "Start Game"
 script = ExtResource("1_ouf4f")
 
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[node name="Options" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 239.0
+offset_top = 448.0
+offset_right = -239.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_uojun")
+theme_override_font_sizes/font_size = 30
+text = "options
+"
+
+[node name="HighscoreScreen" type="Button" parent="."]
+layout_mode = 0
+offset_left = 238.99998
+offset_top = 345.0
+offset_right = 560.2716
+offset_bottom = 441.0
+scale = Vector2(1.0022672, 1)
+theme_override_fonts/font = ExtResource("1_h61rw")
+theme_override_font_sizes/font_size = 30
+text = "Highscore"
+script = ExtResource("2_thu50")
+new_screen_view = ExtResource("3_m7x51")
+metadata/_custom_type_script = "uid://dx57x8kuhqfg0"
+
+[connection signal="pressed" from="StartGameButton" to="StartGameButton" method="_on_pressed"]
+[connection signal="pressed" from="HighscoreScreen" to="HighscoreScreen" method="_on_pressed"]

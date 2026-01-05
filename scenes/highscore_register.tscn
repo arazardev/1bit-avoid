@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://cup7mwuvoqf2x"]
+
+[ext_resource type="Script" uid="uid://ybyax5y7ypmr" path="res://scripts/highscore_register.gd" id="1_4mq75"]
+[ext_resource type="FontFile" uid="uid://dvo7w0816dc1q" path="res://assets/PICO-8.ttf" id="2_8pn46"]
+
+[node name="Control" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4mq75")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(19.999998, 14.96)
+color = Color(0, 0, 0, 1)
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 319.0
+offset_right = 603.0
+offset_bottom = 377.0
+theme_override_fonts/font = ExtResource("2_8pn46")
+theme_override_font_sizes/font_size = 30
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 263.0
+offset_right = 608.0
+offset_bottom = 293.0
+theme_override_fonts/font = ExtResource("2_8pn46")
+theme_override_font_sizes/font_size = 30
+text = "Enter your name:"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 154.0
+offset_right = 692.0
+offset_bottom = 204.0
+theme_override_fonts/font = ExtResource("2_8pn46")
+theme_override_font_sizes/font_size = 50
+text = "new Highscore!"
+
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

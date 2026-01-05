@@ -1,0 +1,85 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjktixyafslii"]
+
+[ext_resource type="Script" uid="uid://bn0l1rgyu0w12" path="res://scripts/score.gd" id="1_2efmg"]
+[ext_resource type="Script" uid="uid://c00u8gyxl4tpc" path="res://scripts/retry_button.gd" id="1_og4qb"]
+[ext_resource type="Script" uid="uid://cwyujqt7sa0bk" path="res://scripts/to_main_menu.gd" id="2_og4qb"]
+[ext_resource type="FontFile" uid="uid://dvo7w0816dc1q" path="res://assets/PICO-8.ttf" id="3_w1h78"]
+
+[node name="GeneralUI" type="Control"]
+z_index = 20
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 8
+
+[node name="GameOver" type="Label" parent="."]
+z_index = 25
+layout_mode = 0
+offset_left = 278.0
+offset_top = 203.0
+offset_right = 544.0
+offset_bottom = 250.0
+theme_override_fonts/font = ExtResource("3_w1h78")
+theme_override_font_sizes/font_size = 34
+text = "Game over!"
+
+[node name="RetryButton" type="Button" parent="GameOver"]
+layout_mode = 0
+offset_left = -55.0
+offset_top = 90.0
+offset_right = 310.0
+offset_bottom = 181.0
+theme_override_fonts/font = ExtResource("3_w1h78")
+theme_override_font_sizes/font_size = 40
+text = "retry"
+script = ExtResource("1_og4qb")
+
+[node name="ToMainMenu" type="Button" parent="GameOver"]
+layout_mode = 0
+offset_left = -53.0
+offset_top = 208.0
+offset_right = 313.0
+offset_bottom = 299.0
+theme_override_fonts/font = ExtResource("3_w1h78")
+theme_override_font_sizes/font_size = 40
+text = "Main menu"
+script = ExtResource("2_og4qb")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 12.0
+offset_right = 625.0
+offset_bottom = 36.0
+theme_override_fonts/font = ExtResource("3_w1h78")
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 2
+script = ExtResource("1_2efmg")
+
+[node name="Win" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 291.0
+offset_top = 210.0
+offset_right = 539.0
+offset_bottom = 284.0
+theme_override_fonts/font = ExtResource("3_w1h78")
+theme_override_font_sizes/font_size = 40
+text = "You Win!"
+
+[node name="RetryButton" type="Button" parent="Win"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 90.0
+offset_right = 245.0
+offset_bottom = 181.0
+theme_override_fonts/font = ExtResource("3_w1h78")
+theme_override_font_sizes/font_size = 40
+text = "retry"
+script = ExtResource("1_og4qb")
+
+[connection signal="pressed" from="GameOver/RetryButton" to="GameOver/RetryButton" method="_on_pressed"]
+[connection signal="pressed" from="GameOver/ToMainMenu" to="GameOver/ToMainMenu" method="_on_pressed"]
+[connection signal="pressed" from="Win/RetryButton" to="Win/RetryButton" method="_on_pressed"]
